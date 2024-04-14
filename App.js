@@ -14,7 +14,7 @@ const App = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.profileContainer}>
-        <Image source={{ uri: 'https://www.pexels.com/photo/portrait-of-woman-15678490/' }} style={styles.profileImage} />
+        <Image source={require('./pfp.png')} style={styles.profileImage} />
         <Text style={styles.greeting}>John Jones</Text>
         <Text>Welcome to CosmicCram Home</Text>
         <TouchableOpacity style={styles.editProfileButton}>
