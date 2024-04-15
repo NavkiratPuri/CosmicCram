@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-const WelcomeScreen = ({navigation}) => {
+const WelcomeScreen = ({nameCheck}) => {
     const [username, setUsername] = useState('');
 
     const handleNameChange = (text) => {
@@ -16,10 +16,12 @@ const WelcomeScreen = ({navigation}) => {
         if (username && username.trim() !== '') {
             
             AsyncStorage.setItem('username', username);
-            //navigation.navigate('HomeStack');
+            
             console.log('next pressed username:', username);
 
-            navigation.navigate('Welcome');
+            nameCheck();
+
+            
         }
     }
 

@@ -32,7 +32,7 @@ function HomeStackNavigator() {
   return (
     <HomeStack.Navigator >
 
-      {/* <HomeStack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/> */}
+      
       <HomeStack.Screen name="HomeStack" component={HomeScreen} options={{headerShown: false}}/>
       <HomeStack.Screen name="NewTask" component={NewTask} options={{headerShown: false}} />
       
@@ -111,7 +111,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      {isLoggedIn ? <MainPages /> : <WelcomeStackNavigator />}
+      {isLoggedIn ? <MainPages /> : <WelcomeScreen nameCheck={nameCheck} />}
     </NavigationContainer>
   );
 };
