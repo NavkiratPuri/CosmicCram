@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const WelcomeScreen = ({navigation}) => {
-    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
 
     const handleNameChange = (text) => {
-        setName(text);
+        setUsername(text);
+        
     };
+
+    const handleNext = () => {
+        if (username && username.trim() !== '') {
+            
+            AsyncStorage.setItem('username', username);
+            //navigation.navigate('HomeStack');
+            console.log('next pressed username:', username);
+
+            navigation.navigate('Welcome');
+        }
+    }
 
     
 
@@ -17,10 +32,10 @@ const WelcomeScreen = ({navigation}) => {
             <TextInput
                 style={styles.input}
                 placeholder="Your Name"
-                value={name}
+                value={username}
                 onChangeText={handleNameChange}
             />
-            <Button title="Welcome" onPress={() => navigation.navigate("HomeStack")} />
+            <Button title="Next" onPress={handleNext} />
         </View>
     );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,21 +13,41 @@ import TasksScreen from './Screens/TasksScreen';
 import NewTask from './Screens/NewTask';
 import WelcomeScreen from './Screens/WelcomeScreen';
 
+// async storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// navigation stacks and tab
 const HomeStack = createNativeStackNavigator();
 const SettingsStack = createNativeStackNavigator();
 const TasksStack = createNativeStackNavigator();
+const WelcomeStack = createNativeStackNavigator();
 
+const Tab = createBottomTabNavigator();
+
+
+
+// navigators (designed like this to accomodate welcome screen only on first open and gesture control per tab as a stack)
 
 function HomeStackNavigator() {
   return (
     <HomeStack.Navigator >
 
-      <HomeStack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
+      {/* <HomeStack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/> */}
       <HomeStack.Screen name="HomeStack" component={HomeScreen} options={{headerShown: false}}/>
       <HomeStack.Screen name="NewTask" component={NewTask} options={{headerShown: false}} />
       
     </HomeStack.Navigator>
+  );
+}
+
+function WelcomeStackNavigator() {
+  return (
+    <WelcomeStack.Navigator >
+
+      <WelcomeStack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
+      
+      
+    </WelcomeStack.Navigator>
   );
 }
 
@@ -49,17 +69,49 @@ function TasksStackNavigator() {
   );
 }
 
+function MainPages() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeStackNavigator} />
+      <Tab.Screen name="Tasks" component={TasksStackNavigator} />
+      <Tab.Screen name="Settings" component={SettingsStackNavigator} />
+      
+    </Tab.Navigator>
+  );
+}
+
+/////////////////////////////////////////////////////////////////
+// main App Component
 const App = () => {
-  const Tab = createBottomTabNavigator();
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+
+  async function nameCheck() {
+    try {
+      const value = await AsyncStorage.getItem('username');
+      if (value == 'Nav') {
+        setUsername(value);
+        setIsLoggedIn(true);
+        console.log('value:', value);
+        console.log('username:', username);
+      }
+      else {
+        
+        console.log('namecheck ran BAD');
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    nameCheck();
+  }, [username]);
+
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeStackNavigator} />
-        <Tab.Screen name="Tasks" component={TasksStackNavigator} />
-        <Tab.Screen name="Settings" component={SettingsStackNavigator} />
-        
-      </Tab.Navigator>
+      {isLoggedIn ? <MainPages /> : <WelcomeStackNavigator />}
     </NavigationContainer>
   );
 };

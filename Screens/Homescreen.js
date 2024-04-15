@@ -52,7 +52,7 @@ const Homescreen = ( {navigation}) => {
             <Text>Set Reminder</Text>
           </TouchableOpacity>
     
-          <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
+          <TouchableOpacity onPress={() => navigation.navigate("TasksStack")} style={styles.newTaskButton}>
             <Text>Add New Task</Text>
           </TouchableOpacity>
         </ScrollView>
