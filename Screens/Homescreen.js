@@ -10,7 +10,9 @@ import {
 
 
 
-const Homescreen = () => {
+
+
+const Homescreen = ( {navigation}) => {
 
     return (
         <ScrollView style={styles.container}>
@@ -50,7 +52,7 @@ const Homescreen = () => {
             <Text>Set Reminder</Text>
           </TouchableOpacity>
     
-          <TouchableOpacity style={styles.newTaskButton}>
+          <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
             <Text>Add New Task</Text>
           </TouchableOpacity>
         </ScrollView>
