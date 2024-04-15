@@ -20,7 +20,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const HomeStack = createNativeStackNavigator();
 const SettingsStack = createNativeStackNavigator();
 const TasksStack = createNativeStackNavigator();
-const WelcomeStack = createNativeStackNavigator();
+//const WelcomeStack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
@@ -30,31 +30,31 @@ const Tab = createBottomTabNavigator();
 
 function HomeStackNavigator() {
   return (
-    <HomeStack.Navigator >
+    <HomeStack.Navigator initialRouteName='Home'>
 
       
-      <HomeStack.Screen name="HomeStack" component={HomeScreen} options={{headerShown: false}}/>
-      <HomeStack.Screen name="NewTask" component={NewTask} options={{headerShown: false}} />
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="NewTask" component={NewTask}  />
       
     </HomeStack.Navigator>
   );
 }
 
-function WelcomeStackNavigator() {
-  return (
-    <WelcomeStack.Navigator >
+// function WelcomeStackNavigator() {
+//   return (
+//     <WelcomeStack.Navigator >
 
-      <WelcomeStack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
+//       <WelcomeStack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
       
       
-    </WelcomeStack.Navigator>
-  );
-}
+//     </WelcomeStack.Navigator>
+//   );
+// }
 
 function SettingsStackNavigator() {
   return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen name="SettingsStack" component={SettingsScreen} />
+    <SettingsStack.Navigator initialRouteName='Settings'>
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
       
     </SettingsStack.Navigator>
   );
@@ -62,8 +62,8 @@ function SettingsStackNavigator() {
 
 function TasksStackNavigator() {
   return (
-    <TasksStack.Navigator>
-      <TasksStack.Screen name="TasksStack" component={TasksScreen} />
+    <TasksStack.Navigator initialRouteName='Tasks'>
+      <TasksStack.Screen name="Tasks" component={TasksScreen} />
       
     </TasksStack.Navigator>
   );
@@ -72,9 +72,9 @@ function TasksStackNavigator() {
 function MainPages() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeStackNavigator} />
-      <Tab.Screen name="Tasks" component={TasksStackNavigator} />
-      <Tab.Screen name="Settings" component={SettingsStackNavigator} />
+      <Tab.Screen name="HomeStack" component={HomeStackNavigator} options={{ headerShown: false }}/>
+      <Tab.Screen name="TasksStack" component={TasksStackNavigator} options={{ headerShown: false }}/>
+      <Tab.Screen name="SettingsStack" component={SettingsStackNavigator} options={{ headerShown: false }}/>
       
     </Tab.Navigator>
   );
@@ -87,13 +87,16 @@ const App = () => {
   const [username, setUsername] = useState('');
 
   async function nameCheck() {
+
+    console.log('is logged in :', isLoggedIn);
     try {
       const value = await AsyncStorage.getItem('username');
-      if (value == 'Nav') {
+      if (value != '' && value != null) {
         setUsername(value);
         setIsLoggedIn(true);
         console.log('value:', value);
         console.log('username:', username);
+        console.log('namecheck ran GOOD');
       }
       else {
         
@@ -103,6 +106,7 @@ const App = () => {
     catch (error) {
       console.log(error);
     }
+
   }
 
   useEffect(() => {
@@ -111,6 +115,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
+      
       {isLoggedIn ? <MainPages /> : <WelcomeScreen nameCheck={nameCheck} />}
     </NavigationContainer>
   );

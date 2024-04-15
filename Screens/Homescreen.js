@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   ScrollView, 
   View, 
@@ -8,19 +8,35 @@ import {
   StyleSheet 
 } from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 
 
 const Homescreen = ( {navigation}) => {
 
+  const [username, setUsername] = useState('');
+  const getName = async () => {
+    const name = await AsyncStorage.getItem('username');
+    setUsername(name);
+  }
+  useEffect(() => {
+    getName();
+  }
+  , [username]);
+  
+
+  
+
+
     return (
         <ScrollView style={styles.container}>
           <View style={styles.profileContainer}>
             <Image source={require('../assets/pfp.png')} style={styles.profileImage} />
-            <Text style={styles.greeting}>John Jones</Text>
-            <Text>Welcome to CosmicCram Home</Text>
-            <TouchableOpacity style={styles.editProfileButton}>
+            <Text style={styles.greeting}>Hello, {username}</Text>
+            <Text>Welcome to CosmicCram</Text>
+            <TouchableOpacity style={styles.editProfileButton} onPress={() => navigation.navigate("SettingsStack")}>
               <Text>Edit Profile</Text>
             </TouchableOpacity>
           </View>
@@ -48,11 +64,11 @@ const Homescreen = ( {navigation}) => {
             {/* Add your study tips content here */}
           </View>
     
-          <TouchableOpacity style={styles.reminderButton} onPress={() => navigation.navigate("SettingsStack")}>
+          <TouchableOpacity style={styles.reminderButton} onPress={() => navigation.navigate("Settings")}>
             <Text>Set Reminder</Text>
           </TouchableOpacity>
     
-          <TouchableOpacity onPress={() => navigation.navigate("TasksStack")} style={styles.newTaskButton}>
+          <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
             <Text>Add New Task</Text>
           </TouchableOpacity>
         </ScrollView>
