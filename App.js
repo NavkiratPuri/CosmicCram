@@ -1,14 +1,17 @@
 import React from 'react';
+
+// navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 
-import HomeScreen from './Screens/Homescreen';
+// screens
+import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
 import TasksScreen from './Screens/TasksScreen';
 import NewTask from './Screens/NewTask';
+import WelcomeScreen from './Screens/WelcomeScreen';
 
 
 const HomeStack = createNativeStackNavigator();
@@ -18,9 +21,11 @@ const TasksStack = createNativeStackNavigator();
 
 function HomeStackNavigator() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="HomeStack" component={HomeScreen} />
-      <HomeStack.Screen name="NewTask" component={NewTask} />
+    <HomeStack.Navigator >
+
+      <HomeStack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
+      <HomeStack.Screen name="HomeStack" component={HomeScreen} options={{headerShown: false}}/>
+      <HomeStack.Screen name="NewTask" component={NewTask} options={{headerShown: false}} />
       
     </HomeStack.Navigator>
   );

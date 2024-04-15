@@ -48,7 +48,7 @@ const Homescreen = ( {navigation}) => {
             {/* Add your study tips content here */}
           </View>
     
-          <TouchableOpacity style={styles.reminderButton}>
+          <TouchableOpacity style={styles.reminderButton} onPress={() => navigation.navigate("SettingsStack")}>
             <Text>Set Reminder</Text>
           </TouchableOpacity>
     
