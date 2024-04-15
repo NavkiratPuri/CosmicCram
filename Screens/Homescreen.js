@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  ScrollView, 
-  View, 
-  Text, 
-  Image, 
-  TouchableOpacity, 
-  StyleSheet 
-} from 'react-native';
+import { ScrollView, View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import TaskCards from '../Components/TaskCard';
 
 
 
-
-const Homescreen = ( {navigation}) => {
+const Homescreen = ({ navigation }) => {
 
   const [username, setUsername] = useState('');
   const getName = async () => {
@@ -24,121 +17,119 @@ const Homescreen = ( {navigation}) => {
   useEffect(() => {
     getName();
   }
-  , [username]);
-  
-
-  
+    , [username]);
 
 
-    return (
-        <ScrollView style={styles.container}>
-          <View style={styles.profileContainer}>
-            <Image source={require('../assets/pfp.png')} style={styles.profileImage} />
-            <Text style={styles.greeting}>Hello, {username}</Text>
-            <Text>Welcome to CosmicCram</Text>
-            <TouchableOpacity style={styles.editProfileButton} onPress={() => navigation.navigate("SettingsStack")}>
-              <Text>Edit Profile</Text>
-            </TouchableOpacity>
-          </View>
-    
+
+
+
+  return (
+
+    <View style={styles.container}>
+      <View style={styles.profileContainer}>
+        <Image source={require('../assets/pfp.png')} style={styles.profileImage} />
+        <Text style={styles.greeting}>Hello, {username}</Text>
+        <Text>Welcome to CosmicCram</Text>
+        <TouchableOpacity style={styles.editProfileButton} onPress={() => navigation.navigate("SettingsStack")}>
+          <Text>Edit Profile</Text>
+        </TouchableOpacity>
+      </View>
+        
+      <View style={styles.tipsContainer}>
+        <Text>Study Tips - CosmicCram Team</Text>
+        
+      </View>
           
-    
-          <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>Upcoming</Text>
-            
-          </View>
-    
-          {/*  
-          <View style={styles.tipsContainer}>
-            <Text>Study Tips - CosmicCram Team</Text>
-            
-          </View>
-          */}
-    
-          <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
-            <Text>Add New Task</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      );
+      <TaskCards horizontalScrollBool={true} />
+
+
+
+      <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
+        <Text>Add New Task</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
     flex: 1,
-    backgroundColor: '#ffffff', 
-    },
-    profileContainer: {
+    backgroundColor: '#ffffff',
+  },
+  profileContainer: {
     alignItems: 'center',
     paddingTop: 20,
     paddingBottom: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#e1e1e1',
-    },
-    profileImage: {
+  },
+  profileImage: {
     width: 80,
     height: 80,
     borderRadius: 40,
     marginBottom: 10,
-    },
-    greeting: {
+  },
+  greeting: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#333333', 
+    color: '#333333',
     marginBottom: 5,
-    },
-    editProfileButton: {
+  },
+  editProfileButton: {
     marginTop: 5,
     padding: 10,
-    },
-    sectionContainer: {
+  },
+  sectionContainer: {
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#e1e1e1', 
-    },
-    sectionTitle: {
+    borderBottomColor: '#e1e1e1',
+  },
+  sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333333', 
+    color: '#333333',
     marginBottom: 10,
-    },
-    viewAllButton: {
+  },
+  viewAllButton: {
     padding: 10,
     alignSelf: 'flex-end',
-    },
-    testsContainer: {
+  },
+  testsContainer: {
     padding: 15,
-    },
-    tipsContainer: {
+  },
+  tipsContainer: {
     padding: 15,
     marginTop: 20,
-    backgroundColor: '#f9f9f9', 
+    backgroundColor: '#f9f9f9',
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#e1e1e1', 
-    },
-    reminderButton: {
+    borderColor: '#e1e1e1',
+  },
+  reminderButton: {
     marginTop: 20,
     paddingVertical: 15,
     paddingHorizontal: 25,
-    backgroundColor: '#4e9af1', 
+    backgroundColor: '#4e9af1',
     borderRadius: 8,
     alignSelf: 'center',
-    },
-    newTaskButton: {
+  },
+  newTaskButton: {
     marginTop: 15,
+    marginBottom: 8,
     paddingVertical: 15,
     paddingHorizontal: 25,
-    backgroundColor: '#f2994a', 
+    backgroundColor: '#f2994a',
     borderRadius: 8,
     alignSelf: 'center',
-    },
-    buttonText: {
+  },
+  buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#ffffff', 
+    color: '#ffffff',
     textAlign: 'center',
-    },
-    });
+  },
+});
 
 export default Homescreen;
 
