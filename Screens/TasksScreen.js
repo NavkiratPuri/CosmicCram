@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 
 
 
@@ -11,11 +11,14 @@ const TasksScreen = ({navigation}) => {
 
     const isFocused = useIsFocused();
 
+    const [tasksList, setTasksList] = useState([]);
+
     const loadTasks = async () => {
         // Load tasks from AsyncStorage
         const tasks = await AsyncStorage.getItem('Tasks');
-        
+        setTasksList(JSON.parse(tasks));
         console.log(JSON.parse(tasks));
+
     }
 
 
@@ -27,12 +30,25 @@ const TasksScreen = ({navigation}) => {
 
     return (
 
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
           
     
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Upcoming</Text>
-            {/* Add your upcoming classes here */}
+
+            <FlatList data={tasksList} renderItem={({item, index}) => {
+                return (
+                    <View style={{width: '90%', height: 200, borderWidth: 1}}>
+                        <Text>{item.taskName}</Text>
+                        <Text>{item.description}</Text>
+                        <Text>{item.dueDate}</Text>
+                        <Text>{item.taskType}</Text>
+                        <Text>{item.priority}</Text>
+                    </View>
+                    );
+                }} 
+            />
+
           </View>
     
     
@@ -41,7 +57,7 @@ const TasksScreen = ({navigation}) => {
           </TouchableOpacity>
 
 
-        </ScrollView>
+        </View>
 
     );
 };
