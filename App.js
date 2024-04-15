@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 // screens
 import HomeScreen from './Screens/HomeScreen';
@@ -72,10 +73,12 @@ function TasksStackNavigator() {
 
 function MainPages() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="HomeStack" component={HomeStackNavigator} options={{ headerShown: false }}/>
-      <Tab.Screen name="TasksStack" component={TasksStackNavigator} options={{ headerShown: false }}/>
-      <Tab.Screen name="SettingsStack" component={SettingsStackNavigator} options={{ headerShown: false }}/>
+    <Tab.Navigator screenOptions={{tabBarActiveTintColor: "purple" }}>
+      <Tab.Screen name="HomeStack" component={HomeStackNavigator} options={{ headerShown: false, tabBarLabel: 'Home', tabBarIcon: () => <Ionicons name='home' size={20}/> }}/>
+
+      <Tab.Screen name="TasksStack" component={TasksStackNavigator} options={{ headerShown: false, tabBarLabel: 'Tasks', tabBarIcon: () => <Ionicons name='library' size={20}/> }}/>
+
+      <Tab.Screen name="SettingsStack" component={SettingsStackNavigator} options={{ headerShown: false, tabBarLabel: 'Settings', tabBarIcon: () => <Ionicons name='cog' size={20}/> }}/>
       
     </Tab.Navigator>
   );
