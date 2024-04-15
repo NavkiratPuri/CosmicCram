@@ -41,32 +41,19 @@ const Homescreen = ( {navigation}) => {
             </TouchableOpacity>
           </View>
     
-          <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>In Progress</Text>
-            {/* Add your in-progress classes here */}
-          </View>
+          
     
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Upcoming</Text>
-            {/* Add your upcoming classes here */}
+            
           </View>
     
-          <View style={styles.testsContainer}>
-            <Text style={styles.sectionTitle}>Upcoming Tests</Text>
-            <TouchableOpacity style={styles.viewAllButton}>
-              <Text>View All</Text>
-            </TouchableOpacity>
-            {/* Add your tests here */}
-          </View>
-    
+          {/*  
           <View style={styles.tipsContainer}>
             <Text>Study Tips - CosmicCram Team</Text>
-            {/* Add your study tips content here */}
+            
           </View>
-    
-          <TouchableOpacity style={styles.reminderButton} onPress={() => navigation.navigate("Settings")}>
-            <Text>Set Reminder</Text>
-          </TouchableOpacity>
+          */}
     
           <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
             <Text>Add New Task</Text>

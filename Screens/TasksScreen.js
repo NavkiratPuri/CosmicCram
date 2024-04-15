@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 
-
+import TaskCards from '../Components/TaskCard';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
@@ -46,29 +46,10 @@ const TasksScreen = ({ navigation }) => {
         <View style={styles.container}>
 
 
-            <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Upcoming</Text>
+            
+            {/* display TaskCards */}
 
-                <FlatList data={tasksList} renderItem={({ item, index }) => {
-                    return (
-                        <View style={styles.tasksContainer}>
-                            <Text>{item.taskName}</Text>
-                            <Text>{item.description}</Text>
-                            <Text>{item.dueDate}</Text>
-                            <Text>{item.taskType}</Text>
-                            <Text>{item.priority}</Text>
-
-                            <TouchableOpacity style={styles.dangerButton} onPress={() => deleteTask(index)}>
-                                <Text style={styles.buttonText}>Delete</Text>
-                            </TouchableOpacity>
-
-                        </View>
-                    );
-                }}
-                />
-
-            </View>
-
+             <TaskCards/> 
 
             <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
                 <Text>Add New Task</Text>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Platform, KeyboardAvoidingView } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -57,7 +57,7 @@ const NewTask = ({ navigation }) => {
                 tasks.push(task);
             });
         }
-        
+
 
         // tempTask = temp;
         // tempTask.map((task) => {
@@ -72,7 +72,7 @@ const NewTask = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior='padding' style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>New Task</Text>
                 <TouchableOpacity onPress={handleSave}>
@@ -197,7 +197,7 @@ const NewTask = ({ navigation }) => {
                     <Text style={styles.actionText}>Save</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -28,7 +28,7 @@ const WelcomeScreen = ({nameCheck}) => {
     
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <Text style={styles.title}>Welcome to Cosmic Cram!</Text>
             <Text style={styles.subtitle}>Please enter your name:</Text>
             <TextInput
@@ -38,7 +38,7 @@ const WelcomeScreen = ({nameCheck}) => {
                 onChangeText={handleNameChange}
             />
             <Button title="Next" onPress={handleNext} />
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 
