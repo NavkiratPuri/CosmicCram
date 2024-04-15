@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, FlatList, Image, StyleSheet, TouchableOpacity, Modal, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react'; // Import useCallback
+import { useCallback } from 'react'; 
 
 function PhotosScreen() {
     const [photos, setPhotos] = useState([]);
