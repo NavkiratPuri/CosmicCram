@@ -16,7 +16,6 @@ export default function TaskCards({
 }) {
 
     const isFocused = useIsFocused();
-
     const [tasksList, setTasksList] = useState([]);
 
     const loadTasks = async () => {
@@ -67,7 +66,7 @@ export default function TaskCards({
                 return { backgroundColor: 'green' };
             default:
                 return { backgroundColor: 'grey' };
-                return;
+                
         }
     };
 
@@ -106,7 +105,7 @@ export default function TaskCards({
                                 <Text>{item.dueDate}</Text>
                             </View>
 
-                            <TouchableOpacity style={styles.dangerButton} onPress={() => deleteTask(index)}>
+                            <TouchableOpacity style={styles.dangerButton} onPress={() => {deleteTask(index)}}>
                                 <Text style={styles.buttonText}>Delete</Text>
                             </TouchableOpacity>
 

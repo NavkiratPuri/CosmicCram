@@ -51,6 +51,7 @@ const NewTask = ({ navigation }) => {
         
         let tempTask = [];
         let temp = JSON.parse(await AsyncStorage.getItem('Tasks'));
+        tasks = [];
         if (temp !== null) {
             tempTask = temp;
             tempTask.map((task) => {
@@ -63,8 +64,9 @@ const NewTask = ({ navigation }) => {
         // tempTask.map((task) => {
         //     tasks.push(task);
         // });
-
+        
         tasks.push({ taskName: taskName, dueDate: dueDate, description: description, taskType: taskType, priority: priority });
+        console.log(tasks);
         await AsyncStorage.setItem('Tasks', JSON.stringify(tasks));
 
         // Navigate back to the Tasks screen
