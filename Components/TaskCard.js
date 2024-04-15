@@ -7,13 +7,7 @@ import { useIsFocused } from '@react-navigation/native';
 
 
 
-export default function TaskCards({
-    taskName,
-    description,
-    dueDate,
-    taskType,
-    priority,
-}) {
+export default function TaskCards({horizontalScrollBool}) {
 
     const isFocused = useIsFocused();
     const [tasksList, setTasksList] = useState([]);
@@ -116,7 +110,7 @@ export default function TaskCards({
                         </View>
                             
                     );
-                }}/>
+                }} horizontal={horizontalScrollBool}/>
             </View>
 
         </View>

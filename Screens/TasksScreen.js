@@ -49,7 +49,7 @@ const TasksScreen = ({ navigation }) => {
             
             {/* display TaskCards */}
 
-             <TaskCards/> 
+             <TaskCards horizontalScrollBool={false}/> 
 
             <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
                 <Text>Add New Task</Text>
