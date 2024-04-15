@@ -26,28 +26,31 @@ const Homescreen = ({ navigation }) => {
   return (
 
     <View style={styles.container}>
-      <View style={styles.profileContainer}>
-        <Image source={require('../assets/pfp.png')} style={styles.profileImage} />
-        <Text style={styles.greeting}>Hello, {username}</Text>
-        <Text>Welcome to CosmicCram</Text>
-        <TouchableOpacity style={styles.editProfileButton} onPress={() => navigation.navigate("SettingsStack")}>
-          <Text>Edit Profile</Text>
-        </TouchableOpacity>
-      </View>
-        
-      <View style={styles.tipsContainer}>
-        <Text>Study Tips - CosmicCram Team</Text>
-        
-      </View>
+      <ScrollView>
+        <View style={styles.profileContainer}>
+          <Image source={require('../assets/pfp.png')} style={styles.profileImage} />
+          <Text style={styles.greeting}>Hello, {username}</Text>
+          <Text>Welcome to CosmicCram</Text>
+          <TouchableOpacity style={styles.editProfileButton} onPress={() => navigation.navigate("SettingsStack")}>
+            <Text>Edit Profile</Text>
+          </TouchableOpacity>
+        </View>
           
-      <TaskCards horizontalScrollBool={true} />
+        <View style={styles.tipsContainer}>
+          <Text>Study Tips - CosmicCram Team</Text>
+          
+        </View>
+
+          
+        <TaskCards horizontalScrollBool={true} />
+        
 
 
+        <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
+          <Text>Add New Task</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
-        <Text>Add New Task</Text>
-      </TouchableOpacity>
-
+      </ScrollView>
     </View>
   );
 }
