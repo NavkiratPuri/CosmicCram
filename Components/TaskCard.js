@@ -71,8 +71,8 @@ export default function TaskCards({
     };
 
 
-    const { borderColor, color } = getTypeDetails(taskType);
-    const { backgroundColor } = getPriorityDetails(priority);
+    
+    
 
 
     return (
@@ -84,6 +84,10 @@ export default function TaskCards({
                 <Text style={styles.sectionTitle}>Upcoming</Text>
 
                 <FlatList data={tasksList} renderItem={({ item, index }) => {
+
+                    const { borderColor, color } = getTypeDetails(item.taskType);
+                    const { backgroundColor } = getPriorityDetails(item.priority);
+
                     return (
                         <View style={styles.card}>
 
