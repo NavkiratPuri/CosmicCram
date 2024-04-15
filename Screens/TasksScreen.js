@@ -11,34 +11,11 @@ const TasksScreen = ({ navigation }) => {
 
     const isFocused = useIsFocused();
 
-    const [tasksList, setTasksList] = useState([]);
-
-    const loadTasks = async () => {
-        // Load tasks from AsyncStorage
-        const tasks = await AsyncStorage.getItem('Tasks');
-        setTasksList(JSON.parse(tasks));
-        console.log(JSON.parse(tasks));
-
-    }
-
-    const deleteTask = async (index) => {
-        const tempTasks = tasksList;
-
-        const selectedTasks = tempTasks.filter((task, i) => {
-            return i != index;
-        });
-
-        setTasksList(selectedTasks);
-        await AsyncStorage.setItem('Tasks', JSON.stringify(selectedTasks));
-    }
-
-
-
 
 
 
     useEffect(() => {
-        loadTasks();
+        //loadTasks();
     }, [isFocused]);
 
     return (
