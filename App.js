@@ -13,6 +13,9 @@ import SettingsScreen from './Screens/SettingsScreen';
 import TasksScreen from './Screens/TasksScreen';
 import NewTask from './Screens/NewTask';
 import WelcomeScreen from './Screens/WelcomeScreen';
+import CameraScreen from './Screens/CameraScreen';
+import NotesScreen from './Screens/NotesScreen';
+import PhotosScreen from './Screens/PhotosScreen';
 
 // async storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,6 +25,10 @@ const HomeStack = createNativeStackNavigator();
 const SettingsStack = createNativeStackNavigator();
 const TasksStack = createNativeStackNavigator();
 //const WelcomeStack = createNativeStackNavigator();
+const CameraStack = createNativeStackNavigator();
+const NotesStack = createNativeStackNavigator();
+const PhotosStack = createNativeStackNavigator();
+
 
 const Tab = createBottomTabNavigator();
 
@@ -71,12 +78,45 @@ function TasksStackNavigator() {
   );
 }
 
+function CameraStackNavigator() {
+  return (
+    <CameraStack.Navigator initialRouteName='Camera'>
+      <CameraStack.Screen name="Camera" component={CameraScreen} />
+      
+    </CameraStack.Navigator>
+  );
+}
+
+function NotesStackNavigator() {
+  return (
+    <NotesStack.Navigator initialRouteName='Notes'>
+      <NotesStack.Screen name="Notes" component={NotesScreen} />
+      
+    </NotesStack.Navigator>
+  );
+}
+
+function PhotosStackNavigator() {
+  return (
+    <PhotosStack.Navigator initialRouteName='Photos'>
+      <PhotosStack.Screen name="Photos" component={PhotosScreen} />
+      
+    </PhotosStack.Navigator>
+  );
+}
+
 function MainPages() {
   return (
     <Tab.Navigator screenOptions={{tabBarActiveTintColor: "purple" }}>
       <Tab.Screen name="HomeStack" component={HomeStackNavigator} options={{ headerShown: false, tabBarLabel: 'Home', tabBarIcon: () => <Ionicons name='home' size={20}/> }}/>
 
       <Tab.Screen name="TasksStack" component={TasksStackNavigator} options={{ headerShown: false, tabBarLabel: 'Tasks', tabBarIcon: () => <Ionicons name='library' size={20}/> }}/>
+
+      <Tab.Screen name="CameraStack" component={CameraStackNavigator} options={{ headerShown: false, tabBarLabel: 'Camera', tabBarIcon: () => <Ionicons name='camera' size={20}/> }}/>
+
+      <Tab.Screen name="PhotosStack" component={PhotosStackNavigator} options={{ headerShown: false, tabBarLabel: 'Photos', tabBarIcon: () => <Ionicons name='images' size={20}/> }}/>
+
+      <Tab.Screen name="NotesStack" component={NotesStackNavigator} options={{ headerShown: false, tabBarLabel: 'Notes', tabBarIcon: () => <Ionicons name='book' size={20}/> }}/>
 
       <Tab.Screen name="SettingsStack" component={SettingsStackNavigator} options={{ headerShown: false, tabBarLabel: 'Settings', tabBarIcon: () => <Ionicons name='cog' size={20}/> }}/>
       
