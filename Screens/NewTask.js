@@ -10,10 +10,10 @@ const NewTask = ({ navigation }) => {
     const [description, setDescription] = useState('');
     const [taskType, setTaskType] = useState('Task'); // Default task type
     const [priority, setPriority] = useState('Medium'); // Default priority
-    
+
     const handleSave = () => {
         // Implement your save logic here
-        console.log(taskName, dueDate, priority);
+        console.log(taskName, dueDate, description, taskType, priority);
     };
 
     return (
