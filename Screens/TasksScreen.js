@@ -26,12 +26,9 @@ const TasksScreen = ({navigation}) => {
             {/* Add your upcoming classes here */}
           </View>
     
-          <TouchableOpacity style={styles.newTaskButton}>
-            <Text>Add New Task </Text>
-          </TouchableOpacity>
     
           <TouchableOpacity onPress={() => navigation.navigate("NewTask")} style={styles.newTaskButton}>
-            <Text>Add New Task (screen)</Text>
+            <Text>Add New Task</Text>
           </TouchableOpacity>
 
 
