@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Platform } from 'react-native';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 
@@ -10,6 +12,34 @@ const NewTask = ({ navigation }) => {
     const [description, setDescription] = useState('');
     const [taskType, setTaskType] = useState('Task'); // Default task type
     const [priority, setPriority] = useState('Medium'); // Default priority
+
+    const [date, setDate] = useState(new Date());
+    const [showPicker, setShowPicker] = useState(false);
+
+    const toggleDatePicker = () => {
+        setShowPicker(!showPicker);
+    };
+
+    const onChange = ({ type }, selectedDate) => {
+        if (type === 'set') {
+            const currentDate = selectedDate;
+            setDate(currentDate);
+
+            if (Platform.os === 'android') {
+                toggleDatePicker();
+                setDueDate(currentDate.toDateString());
+            }
+        }
+        else {
+            toggleDatePicker();
+        }
+    };
+
+    const confirmIOSDate = () => {
+        setDueDate(date.toDateString());
+        toggleDatePicker();
+    }
+
 
     const handleSave = () => {
         // Implement your save logic here
@@ -39,12 +69,45 @@ const NewTask = ({ navigation }) => {
                 onChangeText={setDescription}
             />
 
-            <TextInput
-                style={styles.input}
-                placeholder="Select due date"
-                value={dueDate}
-                onChangeText={setDueDate}
-            />
+            {showPicker && (
+                <DateTimePicker
+                    value={date}
+                    mode="date"
+                    display="spinner"
+                    onChange={onChange}
+                />
+
+            )}
+
+            {showPicker && Platform.OS === 'ios' && (
+                <View
+                    style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={toggleDatePicker}>
+                        <Text style={styles.actionText}>Cancel</Text>
+                    </TouchableOpacity>
+                </View>)}
+
+            {showPicker && Platform.OS === 'ios' && (
+                <View
+                    style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <TouchableOpacity style={styles.saveButton} onPress={confirmIOSDate}>
+                        <Text style={styles.actionText}>Confirm</Text>
+                    </TouchableOpacity>
+                </View>)}
+
+            {!showPicker && (
+                <Pressable
+                    onPress={toggleDatePicker}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Select due date"
+                        value={dueDate}
+                        onChangeText={setDueDate}
+                        editable={false}
+                        onPressIn={toggleDatePicker}
+                    />
+                </Pressable>
+            )}
 
             {/* Task Type Section */}
             <View style={styles.taskTypeContainer}>
