@@ -64,6 +64,7 @@ function TasksStackNavigator() {
   return (
     <TasksStack.Navigator initialRouteName='Tasks'>
       <TasksStack.Screen name="Tasks" component={TasksScreen} />
+      <TasksStack.Screen name="NewTask" component={NewTask} />
       
     </TasksStack.Navigator>
   );
