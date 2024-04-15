@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Platform } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
+let tasks = [];
 
 const NewTask = ({ navigation }) => {
 
@@ -13,9 +14,11 @@ const NewTask = ({ navigation }) => {
     const [taskType, setTaskType] = useState('Task'); // Default task type
     const [priority, setPriority] = useState('Medium'); // Default priority
 
+    // Date picker state
     const [date, setDate] = useState(new Date());
     const [showPicker, setShowPicker] = useState(false);
 
+    //date picker functions
     const toggleDatePicker = () => {
         setShowPicker(!showPicker);
     };
@@ -41,9 +44,31 @@ const NewTask = ({ navigation }) => {
     }
 
 
-    const handleSave = () => {
-        // Implement your save logic here
+    //for saving task
+    const handleSave = async () => {
+        // Implement save logic here
         console.log(taskName, dueDate, description, taskType, priority);
+        
+        let tempTask = [];
+        let temp = JSON.parse(await AsyncStorage.getItem('Tasks'));
+        if (temp !== null) {
+            tempTask = temp;
+            tempTask.map((task) => {
+                tasks.push(task);
+            });
+        }
+        
+
+        // tempTask = temp;
+        // tempTask.map((task) => {
+        //     tasks.push(task);
+        // });
+
+        tasks.push({ taskName: taskName, dueDate: dueDate, description: description, taskType: taskType, priority: priority });
+        await AsyncStorage.setItem('Tasks', JSON.stringify(tasks));
+
+        // Navigate back to the Tasks screen
+        navigation.goBack();
     };
 
     return (
@@ -69,6 +94,7 @@ const NewTask = ({ navigation }) => {
                 onChangeText={setDescription}
             />
 
+            {/* Date picker  */}
             {showPicker && (
                 <DateTimePicker
                     value={date}
@@ -81,7 +107,7 @@ const NewTask = ({ navigation }) => {
 
             {showPicker && Platform.OS === 'ios' && (
                 <View
-                    style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    style={{ flexDirection: 'column', justifyContent: 'space-around', marginBottom:10 }}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleDatePicker}>
                         <Text style={styles.actionText}>Cancel</Text>
                     </TouchableOpacity>
@@ -89,9 +115,9 @@ const NewTask = ({ navigation }) => {
 
             {showPicker && Platform.OS === 'ios' && (
                 <View
-                    style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    style={{ flexDirection: 'column', justifyContent: 'space-around', marginBottom: 15 }}>
                     <TouchableOpacity style={styles.saveButton} onPress={confirmIOSDate}>
-                        <Text style={styles.actionText}>Confirm</Text>
+                        <Text style={styles.actionText}>Confirm Date</Text>
                     </TouchableOpacity>
                 </View>)}
 

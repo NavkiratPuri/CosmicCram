@@ -4,21 +4,30 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-nati
 
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native';
 
 
 const TasksScreen = ({navigation}) => {
+
+    const isFocused = useIsFocused();
+
+    const loadTasks = async () => {
+        // Load tasks from AsyncStorage
+        const tasks = await AsyncStorage.getItem('Tasks');
+        
+        console.log(JSON.parse(tasks));
+    }
 
 
 
 
     useEffect(() => {
-    }, []);
+        loadTasks();
+    }, [isFocused]);
 
     return (
 
         <ScrollView style={styles.container}>
-          
-    
           
     
           <View style={styles.sectionContainer}>
