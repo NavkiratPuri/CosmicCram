@@ -7,7 +7,7 @@ import TaskCards from '../Components/TaskCard';
 
 
 
-const Homescreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }) => {
 
   const [username, setUsername] = useState('');
   const getName = async () => {
