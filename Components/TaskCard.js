@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Platform, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Platform, FlatList, TouchableOpacity, Alert } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
@@ -27,6 +27,7 @@ export default function TaskCards({horizontalScrollBool}) {
 
         setTasksList(selectedTasks);
         await AsyncStorage.setItem('Tasks', JSON.stringify(selectedTasks));
+        Alert.alert('Task Deleted');
     }
 
     useEffect(() => {
