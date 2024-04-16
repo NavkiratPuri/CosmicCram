@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Button, StyleSheet, Text } from 'react-native';
+import { View, Button, StyleSheet, Text, Alert } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -31,6 +31,7 @@ function CameraScreen() {
         updatedUris.push(newPath);
         await AsyncStorage.setItem('photoUris', JSON.stringify(updatedUris));
         console.log('Photo saved:', newPath);
+        Alert.alert('Photo saved');
       } catch (e) {
         console.error('Error saving photo', e);
       }
