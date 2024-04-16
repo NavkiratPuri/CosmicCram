@@ -140,26 +140,28 @@ const styles = StyleSheet.create({
         }),
     },
     nameContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        
         marginBottom: 16,
 
     },
     name: {
-        fontSize: 24,
+        fontSize: 22,
         fontWeight: 'bold',
+        color: '#333',
     },
     description: {
         fontSize: 16,
-        color: '#333',
+        color: '#666', // Medium grey
+        marginTop: 4,
+        width: 200,
     },
     typeContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 40,
+        marginBottom: 10,
     },
     lining: {
-        flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 6,
         paddingHorizontal: 12,
@@ -172,12 +174,13 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     priorityText: {
+        fontSize: 16,
         color: '#fff',
         fontWeight: 'bold',
     },
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f4f4f8', 
     },
     profileContainer: {
         alignItems: 'center',
@@ -245,17 +248,16 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     buttonText: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold',
         color: '#ffffff',
         textAlign: 'center',
     },
     dangerButton: {
         backgroundColor: '#f44336',
-        padding: 15,
+        padding: 10,
         borderRadius: 5,
         margin: 10,
-        width: '30%',
         alignItems: 'center',
         alignSelf: 'center',
     },

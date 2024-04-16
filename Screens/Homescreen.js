@@ -35,13 +35,7 @@ const Homescreen = ({ navigation }) => {
             <Text>Edit Profile</Text>
           </TouchableOpacity>
         </View>
-          
-        <View style={styles.tipsContainer}>
-          <Text>Study Tips - CosmicCram Team</Text>
-          
-        </View>
-
-          
+         
         <TaskCards horizontalScrollBool={true} />
         
 

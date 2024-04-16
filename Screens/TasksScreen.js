@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     },
     newTaskButton: {
         marginTop: 15,
+        marginBottom: 10,
         paddingVertical: 15,
         paddingHorizontal: 25,
         backgroundColor: '#f2994a',

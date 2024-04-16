@@ -1,17 +1,24 @@
 import react from "react";
-import { ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, Button } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, Button, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SettingsScreen = () => {
 
-    const handleReset = () => {
-        AsyncStorage.removeItem('username');
-        console.log(' Reset Username--');
+    const handleNameClear = async () => {
+      try{
+        await AsyncStorage.removeItem('username');
+        Alert.alert('Username cleared restart to reset Username');
+        console.log(' Cleared Username--');
+      }catch(e){
+        console.log(e);
+      }
     }
 
     const handleTaskClear = async () => {
         try {
           await AsyncStorage.removeItem('Tasks')
+          Alert.alert('Tasks Cleared')
+          
         } 
         catch(e) {
           
@@ -19,17 +26,35 @@ const SettingsScreen = () => {
       
         console.log('Tasks Cleared--')
       }
+
+    const handleDBClear = async () => {
+      try {
+        await AsyncStorage.clear()
+
+        Alert.alert('All App Storage Cleared')
+
+      } catch(e) {
+        // clear error
+      }
+    
+        console.log('DB Cleared--');
+    }
     
 
     return (
+
         <SafeAreaView style={styles.container}>
 
-            <TouchableOpacity style={styles.button} onPress={handleReset}>
-                <Text style={styles.buttonText}>Reset Username</Text>
+            <TouchableOpacity style={styles.button} onPress={handleNameClear}>
+                <Text style={styles.buttonText}>Clear Username</Text>
             </TouchableOpacity>
-
+            
             <TouchableOpacity style={styles.dangerButton} onPress={handleTaskClear}>
                 <Text style={styles.buttonText}>Reset Tasks</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.dangerButton} onPress={handleDBClear}>
+                <Text style={styles.buttonText}>Reset All App Storage</Text>
             </TouchableOpacity>
 
         </SafeAreaView>
